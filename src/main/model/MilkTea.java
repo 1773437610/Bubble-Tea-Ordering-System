@@ -23,4 +23,8 @@ public class MilkTea extends Drinks {
     public int getIceLevel() {
         return iceLevel;
     }
+
+    public void setIceLevel(int num) {
+        this.iceLevel = num;
+    }
 }
