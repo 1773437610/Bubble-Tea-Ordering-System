@@ -9,9 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestDrinks {
     Drinks drinks;
+    Drinks drinks2;
     @BeforeEach
     public void setUp () {
         drinks = new MilkTea();
+        drinks2 = new Drinks(50, "Large");
         drinks.setSize("Large");
         drinks.setSweetness(50);
         drinks.addIngredient(new Bubble());
@@ -28,5 +30,15 @@ class TestDrinks {
         assertEquals(3, drinks.getIngredients().size());
         assertEquals(1, drinks.getToppings().size());
         assertEquals(0, ((MilkTea)drinks).getIceLevel());
+
+        assertEquals(50, drinks.getSweetness());
+        assertEquals("Large", drinks.getSize());
+    }
+
+    @Test
+    void testIngredientAdded() {
+        assertEquals("Bubble", drinks.getIngredients().get(0).getName());
+        assertEquals("Milk", drinks.getIngredients().get(1).getName());
+        assertEquals("Tea", drinks.getIngredients().get(2).getName());
     }
 }
