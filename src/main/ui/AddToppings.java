@@ -7,7 +7,11 @@ import model.ingredients.Tea;
 
 import java.util.Scanner;
 
+//Represent all actions related to add new toppings
 public class AddToppings {
+
+    //MODIFIES: add toppings to the drink
+    //EFFECTS: prompt the user if they want to add toppings or not
     public static void addToppings(Drinks drinks) {
         Scanner input = new Scanner(System.in);
         while (true) {

@@ -8,7 +8,11 @@ import java.util.ArrayList;
 
 //Display the order details
 public class DisplayOrder {
+    public static void displayAllOrders() {
 
+    }
+
+    //EFFECTS: display the detail of drinks in the order
     public static void displayOrder(Order order) {
         System.out.println("Orders:\n");
         ArrayList<Drinks> currentOrder = order.getItemsOrdered();
@@ -24,6 +28,7 @@ public class DisplayOrder {
         }
     }
 
+    //EFFECTS: print out the Ingredients in the array
     public static void toString(ArrayList<Ingredient> array) {
         for (Ingredient i : array) {
             System.out.print(i.getName() + " ");

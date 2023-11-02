@@ -6,18 +6,33 @@ import model.Order;
 
 import java.util.Scanner;
 
+//Represent the modifying of Orders
 public class ModifyOrders {
     public static void modifyOrder(Order order) {
         Scanner input = new Scanner(System.in);
-
         while (true) {
-            System.out.println("Add Order? (Y/N)");
+            System.out.println("Start an new order? (Y/N)");
             String answer = input.next();
             if (answer.equals("Y")) {
-                System.out.print("What types of drink would you like to add\nFor the type MilkTea: ");
-                System.out.print("{MilkTea} {(1-100)} {(1-100)} {Large, Medium, Small}");
-                System.out.print("(type, ice level, sweetness, size)\nFor the type Drinks: ");
-                System.out.print("{Drinks} {1-100} {Large, Medium, Small}\n(type, sweetness, size)");
+                addDrinks(order);
+            } else {
+                Order.addToOrdersHistory(order);
+                break;
+            }
+        }
+
+    }
+
+    //MODIFIES: order
+    //EFFECTS: add drinks to the order with customer's desired customization
+    public static void addDrinks(Order order) {
+        Scanner input = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Add drinks to an order? (Y/N)");
+            String answer = input.next();
+            if (answer.equals("Y")) {
+                print();
                 answer = input.next();
                 if (answer.equals("MilkTea")) {
                     Drinks drinks = new MilkTea(input.nextInt(), input.nextInt(), input.next());
@@ -32,5 +47,13 @@ public class ModifyOrders {
                 break;
             }
         }
+    }
+
+    //EFFECTS: print out the questions and prompts before retrieving answer from user
+    private static void print() {
+        System.out.print("What types of drink would you like to add\nFor the type MilkTea: ");
+        System.out.println("{MilkTea} {(1-100)} {(1-100)} {Large, Medium, Small}");
+        System.out.print("(type, ice level, sweetness, size)\nFor the type Drinks: ");
+        System.out.println("{Drinks} {1-100} {Large, Medium, Small}\n(type, sweetness, size)");
     }
 }
