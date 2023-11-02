@@ -1,6 +1,10 @@
 # My Personal Project
 
-## A subtitle
+## An ordered system for bubble tea shop
+
+The application empowers employees to **manage orders** and **oversee related tasks** within a bubble tea shop. 
+My passion for bubble tea inspired this initiative, as I believe such an application *streamlines operations* 
+and enhances *user experience*.
 
 A *bulleted* list:
 - item 1

@@ -7,24 +7,29 @@ import model.Order;
 import java.util.Scanner;
 
 public class ModifyOrders {
-    public static void modifyOrders(Order order) {
+    public static void modifyOrder(Order order) {
         Scanner input = new Scanner(System.in);
 
         while (true) {
-            System.out.print("Add Order? (Y/N)\n");
-            String answer = input.nextLine();
+            System.out.println("Add Order? (Y/N)");
+            String answer = input.next();
             if (answer.equals("Y")) {
-                System.out.println("What types of drink? Sweetness? Ice level? (follow by space)");
-                System.out.println("Choices: For MilkTea: MilkTea/(1-100)/(1-100)/(Large, Medium, Small)");
-                System.out.println(("\t\tFor Drinks: Drinks/(1-100)/(Large, Medium, Small)"));
+                System.out.print("What types of drink would you like to add\nFor the type MilkTea: ");
+                System.out.print("{MilkTea} {(1-100)} {(1-100)} {Large, Medium, Small}");
+                System.out.print("(type, ice level, sweetness, size)\nFor the type Drinks: ");
+                System.out.print("{Drinks} {1-100} {Large, Medium, Small}\n(type, sweetness, size)");
                 answer = input.next();
                 if (answer.equals("MilkTea")) {
-                    order.addToOrdered(new MilkTea(input.nextInt(), input.nextInt(), input.next()));
+                    Drinks drinks = new MilkTea(input.nextInt(), input.nextInt(), input.next());
+                    order.addToOrdered(drinks);
+                    AddToppings.addToppings(drinks);
                 } else if (answer.equals("Drinks")) {
-                    order.addToOrdered(new Drinks(input.nextInt(), input.next()));
+                    Drinks drinks = new Drinks(input.nextInt(), input.next());
+                    order.addToOrdered(drinks);
+                    AddToppings.addToppings(drinks);
                 }
             } else if (answer.equals("N")) {
-                return;
+                break;
             }
         }
     }
