@@ -43,6 +43,8 @@ class TestDrinks {
     @Test
     void testContainsBubble() {
         assertFalse(drinks2.containsBubbleAlready());
+        drinks2.addIngredient(Ingredients.MILK);
+        assertFalse(drinks2.containsBubbleAlready());
         drinks2.addIngredient(Ingredients.BUBBLE);
         assertTrue(drinks2.containsBubbleAlready());
     }
