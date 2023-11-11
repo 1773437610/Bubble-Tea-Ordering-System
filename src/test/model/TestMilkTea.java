@@ -1,11 +1,9 @@
 package model;
 
-import model.ingredients.Bubble;
-import model.ingredients.Milk;
-import model.ingredients.Tea;
+import model.ingredients.Ingredients;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestDrinks {
     Drinks drinks;
@@ -16,10 +14,10 @@ class TestDrinks {
         drinks2 = new Drinks(50, "Large");
         drinks.setSize("Large");
         drinks.setSweetness(50);
-        drinks.addIngredient(new Bubble());
-        drinks.addIngredient(new Milk());
-        drinks.addIngredient(new Tea());
-        drinks.addToppings(new Bubble());
+        drinks.addIngredient(Ingredients.BUBBLE);
+        drinks.addIngredient(Ingredients.MILK);
+        drinks.addIngredient(Ingredients.TEA);
+        drinks.addToppings(Ingredients.BUBBLE);
         ((MilkTea)drinks).setIceLevel(0);
     }
 
@@ -37,8 +35,15 @@ class TestDrinks {
 
     @Test
     void testIngredientAdded() {
-        assertEquals("Bubble", drinks.getIngredients().get(0).getName());
-        assertEquals("Milk", drinks.getIngredients().get(1).getName());
-        assertEquals("Tea", drinks.getIngredients().get(2).getName());
+        assertEquals("BUBBLE", drinks.getIngredients().get(0).toString());
+        assertEquals("MILK", drinks.getIngredients().get(1).toString());
+        assertEquals("TEA", drinks.getIngredients().get(2).toString());
+    }
+
+    @Test
+    void testContainsBubble() {
+        assertFalse(drinks2.containsBubbleAlready());
+        drinks2.addIngredient(Ingredients.BUBBLE);
+        assertTrue(drinks2.containsBubbleAlready());
     }
 }

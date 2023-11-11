@@ -11,6 +11,7 @@ and enhances *user experience*.
 - As a user, I want to be able to display all the drinks in an order with their types and desired customizations after the order is added.
 - As a user, I want to be able to add toppings to drinks after I add them to an order.
 - As a user, I want to be able to display the toppings I added after I add drinks.
-
+- As a user, when I close the application, I want to be able to save the orders to files.
+- As a user, when I start the application, I want to be given the option to load my previous orders from files.
 
 An example of text with **bold** and *italic* fonts.  

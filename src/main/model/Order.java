@@ -7,7 +7,8 @@ public class Order {
     private static ArrayList<Order> orderHistory;
     private final ArrayList<Drinks> itemsOrdered;
 
-
+    //MODIFIES: this
+    //initializes fields
     public Order() {
         itemsOrdered = new ArrayList<>();
         orderHistory = new ArrayList<>();

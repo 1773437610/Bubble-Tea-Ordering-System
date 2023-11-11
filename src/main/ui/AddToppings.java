@@ -1,9 +1,7 @@
 package ui;
 
 import model.Drinks;
-import model.ingredients.Bubble;
-import model.ingredients.Milk;
-import model.ingredients.Tea;
+import model.ingredients.Ingredients;
 
 import java.util.Scanner;
 
@@ -22,11 +20,11 @@ public class AddToppings {
                 input.nextLine();
                 String text = input.nextLine();
                 if (text.equals("Bubble")) {
-                    drinks.addToppings(new Bubble());
+                    drinks.addToppings(Ingredients.BUBBLE);
                 } else if (text.equals("Milk")) {
-                    drinks.addToppings(new Milk());
+                    drinks.addToppings(Ingredients.MILK);
                 } else if (text.equals("Tea")) {
-                    drinks.addToppings(new Tea());
+                    drinks.addToppings(Ingredients.MILK);
                 }
             } else {
                 break;

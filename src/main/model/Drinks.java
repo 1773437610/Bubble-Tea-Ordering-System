@@ -1,13 +1,13 @@
 package model;
 
-import model.ingredients.Ingredient;
+import model.ingredients.Ingredients;
 
 import java.util.ArrayList;
 
 //Represents drinks that can be ordered by customers
 public class Drinks {
-    private final ArrayList<Ingredient> ingredients;
-    private final ArrayList<Ingredient> toppings;
+    private final ArrayList<Ingredients> ingredients;
+    private final ArrayList<Ingredients> toppings;
     private int sweetness;
     private String size;
 
@@ -20,13 +20,23 @@ public class Drinks {
         size = "medium";
     }
 
-    ////MODIFIES: this
+    //MODIFIES: this
     //EFFECTS: initialize fields
     public Drinks(int sweetness, String size) {
         ingredients = new ArrayList<>();
         toppings = new ArrayList<>();
         this.sweetness = sweetness;
         this.size = size;
+    }
+
+    //EFFECTS: return boolean value that if this contains bubbles or not
+    public boolean containsBubbleAlready() {
+        for (Ingredients i : ingredients) {
+            if (i.toString().equals("BUBBLE")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setSweetness(int sweetness) {
@@ -37,19 +47,19 @@ public class Drinks {
         this.size = size;
     }
 
-    public void addIngredient(Ingredient ingredient) {
+    public void addIngredient(Ingredients ingredient) {
         ingredients.add(ingredient);
     }
 
-    public ArrayList<Ingredient> getIngredients() {
+    public ArrayList<Ingredients> getIngredients() {
         return ingredients;
     }
 
-    public void addToppings(Ingredient i) {
+    public void addToppings(Ingredients i) {
         toppings.add(i);
     }
 
-    public ArrayList<Ingredient> getToppings() {
+    public ArrayList<Ingredients> getToppings() {
         return toppings;
     }
 
