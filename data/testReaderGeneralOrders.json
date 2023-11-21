@@ -1,0 +1,24 @@
+{"Orders": [{"Drinks": [
+    {
+        "Type": "class model.Drinks",
+        "size": "large",
+        "sweetness": 100
+    },
+    {
+        "Type": "class model.MilkTea",
+        "size": "small",
+        "icelevel": 25,
+        "sweetness": 25
+    }]},
+    {"Drinks": [
+    {   "Type": "class model.MilkTea",
+        "size": "small",
+        "icelevel": 100,
+        "sweetness": 100
+    },
+    {
+        "Type": "class model.Drinks",
+        "size": "medium",
+        "sweetness": 0
+    }]}
+]}

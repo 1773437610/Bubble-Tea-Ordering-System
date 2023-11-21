@@ -1,0 +1,5 @@
+{"Orders": [{"Drinks": [{
+    "Type": "class model.Drinks",
+    "size": "Medium",
+    "sweetness": 5
+}]}]}
