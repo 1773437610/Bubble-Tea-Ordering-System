@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 //Represents milk tea
 public class MilkTea extends Drinks {
     private int iceLevel;
@@ -31,5 +33,13 @@ public class MilkTea extends Drinks {
 
     public void setIceLevel(int num) {
         this.iceLevel = num;
+    }
+
+    //EFFECTS: return a json object that stores all the fields
+    @Override
+    public JSONObject toJson() {
+        super.toJson();
+        getJson().put("icelevel", iceLevel);
+        return getJson();
     }
 }

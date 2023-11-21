@@ -2,12 +2,11 @@ package persistence;
 
 import model.*;
 
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-/*
+
 import java.util.stream.Stream;
 
 import model.ingredients.Ingredients;
@@ -23,9 +22,9 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
-    // throws IOException if an error occurs reading data from file
+    // EFFECTS: throws IOException if an error occurs reading data from file
     public void read() throws IOException {
+        Order.getOrdersHistory().clear();
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         parseOrder(jsonObject);
@@ -42,7 +41,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses order from JSON object and returns it
     private void parseOrder(JSONObject jsonObject) {
         addOrder(jsonObject);
     }
@@ -52,10 +51,10 @@ public class JsonReader {
     private void addOrder(JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Orders");
         for (Object json : jsonArray) {
-            JSONObject nextOrder = (JSONObject) json;
+            JSONObject currOrder = (JSONObject) json;
             Order order = new Order();
             Order.addToOrdersHistory(order);
-            addDrinks(order, nextOrder);
+            addDrinks(order, currOrder);
         }
     }
 
@@ -64,18 +63,19 @@ public class JsonReader {
     private void addDrinks(Order order, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Drinks");
         for (Object json : jsonArray) {
-            JSONObject nextDrinks = (JSONObject) json;
-            if (jsonObject.getString("Type").equals("MilkTea")) {
-                int icelevel = Integer.valueOf(jsonObject.getString("icelevel"));
-                int sweetness = Integer.valueOf(jsonObject.getString("sweetness"));
-                String size = String.valueOf(jsonObject.getString("sweetness"));
+            JSONObject currDrinks = (JSONObject) json;
+            if (currDrinks.getString("Type").equals("class model.MilkTea")) {
+                int icelevel = currDrinks.getInt("icelevel");
+                int sweetness = currDrinks.getInt("sweetness");
+                String size = currDrinks.getString("size");
                 order.addToOrdered(new MilkTea(icelevel, sweetness, size));
-            } else if (jsonObject.getString("Type").equals("Drinks")) {
-                int sweetness = Integer.valueOf(jsonObject.getString("sweetness"));
-                String size = String.valueOf(jsonObject.getString("sweetness"));
+            } else if (currDrinks.getString("Type").equals("class model.Drinks")) {
+                int sweetness = currDrinks.getInt("sweetness");
+                String size = currDrinks.getString("size");
                 order.addToOrdered(new Drinks(sweetness, size));
             }
         }
     }
 }
-*/
+
+

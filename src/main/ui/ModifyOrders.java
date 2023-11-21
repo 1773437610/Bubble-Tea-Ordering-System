@@ -8,20 +8,13 @@ import java.util.Scanner;
 
 //Represent the modifying of Orders
 public class ModifyOrders {
-    public static void modifyOrder(Order order) {
+    public static void modifyOrder() {
         Scanner input = new Scanner(System.in);
-        while (true) {
-            System.out.println("Start an new order? (Y/N)");
-            String answer = input.next();
-            if (answer.equals("Y")) {
-                addDrinks(order);
-            } else {
-                Order.addToOrdersHistory(order);
-                break;
-            }
-        }
-
+        Order order = new Order();
+        addDrinks(order);
+        Order.addToOrdersHistory(order);
     }
+
 
     //MODIFIES: order
     //EFFECTS: add drinks to the order with customer's desired customization

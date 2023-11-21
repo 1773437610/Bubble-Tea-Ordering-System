@@ -1,15 +1,19 @@
 package model;
 
 import model.ingredients.Ingredients;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 
 //Represents drinks that can be ordered by customers
-public class Drinks {
+public class Drinks implements Writable {
     private final ArrayList<Ingredients> ingredients;
     private final ArrayList<Ingredients> toppings;
     private int sweetness;
     private String size;
+    private JSONObject json;
 
     //MODIFIES: this
     //EFFECTS: initialize fields
@@ -69,5 +73,38 @@ public class Drinks {
 
     public String getSize() {
         return size;
+    }
+
+    //EFFECTS: return a json object that stores all the fields
+    @Override
+    public JSONObject toJson() {
+        json = new JSONObject();
+        json.put("Type", this.getClass());
+        json.put("sweetness", sweetness);
+        json.put("size", size);
+        return json;
+    }
+
+    public JSONObject getJson() {
+        return json;
+    }
+
+    //EFFECTS: return true if both drinks has identical fields (storing the same information)
+    public boolean equals(Drinks drinks) {
+        if (this.getSweetness() == drinks.getSweetness() && this.getSize().equals(drinks.getSize())) {
+            if (compareArray(toppings, drinks.getToppings()) && compareArray(ingredients, drinks.getIngredients())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //EFFECTS: return true if two arraylist printing out the same result
+    public boolean compareArray(ArrayList array1, ArrayList array2) {
+        if (array1.toString().equals(array2.toString())) {
+            return true;
+        }
+
+        return false;
     }
 }
