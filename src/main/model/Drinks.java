@@ -90,8 +90,9 @@ public class Drinks implements Writable {
 
     //EFFECTS: return true if both drinks has identical fields (storing the same information)
     public boolean equals(Drinks drinks) {
-        return this.getClass().equals(drinks.getClass()) && this.getSweetness() == drinks.getSweetness() && this.getSize().equals(drinks.getSize())
-                && compareArray(toppings, drinks.getToppings()) && compareArray(ingredients, drinks.getIngredients());
+        return this.getClass().equals(drinks.getClass()) && this.getSweetness() == drinks.getSweetness()
+                && this.getSize().equals(drinks.getSize()) && compareArray(toppings, drinks.getToppings())
+                && compareArray(ingredients, drinks.getIngredients());
     }
 
     //EFFECTS: return true if two arraylist printing out the same result
