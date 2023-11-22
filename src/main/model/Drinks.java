@@ -1,7 +1,6 @@
 package model;
 
 import model.ingredients.Ingredients;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -91,20 +90,12 @@ public class Drinks implements Writable {
 
     //EFFECTS: return true if both drinks has identical fields (storing the same information)
     public boolean equals(Drinks drinks) {
-        if (this.getSweetness() == drinks.getSweetness() && this.getSize().equals(drinks.getSize())) {
-            if (compareArray(toppings, drinks.getToppings()) && compareArray(ingredients, drinks.getIngredients())) {
-                return true;
-            }
-        }
-        return false;
+        return this.getSweetness() == drinks.getSweetness() && this.getSize().equals(drinks.getSize())
+                && compareArray(toppings, drinks.getToppings()) && compareArray(ingredients, drinks.getIngredients());
     }
 
     //EFFECTS: return true if two arraylist printing out the same result
-    public boolean compareArray(ArrayList array1, ArrayList array2) {
-        if (array1.toString().equals(array2.toString())) {
-            return true;
-        }
-
-        return false;
+    public boolean compareArray(ArrayList<Ingredients> array1, ArrayList<Ingredients> array2) {
+        return (array1.toString().equals(array2.toString()));
     }
 }
