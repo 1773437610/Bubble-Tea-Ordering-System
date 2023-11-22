@@ -13,12 +13,8 @@ public class AppPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.GRAY);
-        g.drawRect(JPanel.WIDTH, JPanel.HEIGHT, JPanel.WIDTH/4, JPanel.HEIGHT/4);
-        drawBackground(g);
+        g.drawRect(JPanel.WIDTH, JPanel.HEIGHT, JPanel.WIDTH / 4, JPanel.HEIGHT / 4);
 
-    }
-
-    private void drawBackground(Graphics g) {
     }
 
 
