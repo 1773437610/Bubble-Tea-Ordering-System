@@ -18,19 +18,21 @@ public class OrderApp {
 
     public static void main(String[] args) {
         try {
-            new OrderApp();
+            new OrderApp(true);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to run application: file not found");
         }
     }
 
-    public OrderApp() throws FileNotFoundException {
+    public OrderApp(Boolean ifRun) throws FileNotFoundException {
         input = new Scanner(System.in);
         order = new Order();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
-        runOrderApp();
+        if (ifRun) {
+            runOrderApp();
+        }
     }
 
     //EFFECTS: perform operations based on user's input and prompt if the input is not valid
@@ -57,7 +59,7 @@ public class OrderApp {
     }
 
     // EFFECTS: saves the Order to file
-    private void saveOrder() {
+    public void saveOrder() {
         try {
             jsonWriter.open();
             jsonWriter.write(order);
@@ -70,7 +72,7 @@ public class OrderApp {
 
     // MODIFIES: this
     // EFFECTS: loads Order from file
-    private void loadOrder() {
+    public void loadOrder() {
         try {
             jsonReader.read();
             System.out.println("Loaded orders from " + JSON_STORE);
