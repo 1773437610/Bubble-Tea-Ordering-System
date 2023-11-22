@@ -55,5 +55,10 @@ class TestDrinks {
         assertFalse(drinks2.equals(drinks));
         Drinks newDrinks = new Drinks(50, "Large");
         assertTrue(drinks2.equals(newDrinks));
+        drinks2.addIngredient(Ingredients.BUBBLE);
+        assertFalse(drinks2.equals(newDrinks));
+        drinks.addIngredient(Ingredients.BUBBLE);
+        drinks.addToppings(Ingredients.MILK);
+        assertFalse(drinks2.equals(newDrinks));
     }
 }
