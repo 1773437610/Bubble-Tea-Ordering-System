@@ -20,5 +20,11 @@
         "Type": "class model.Drinks",
         "size": "medium",
         "sweetness": 0
-    }]}
+    },
+    {
+	"Type": "class null",
+	"size": "medium",
+        "sweetness": 0
+    }
+]}
 ]}
