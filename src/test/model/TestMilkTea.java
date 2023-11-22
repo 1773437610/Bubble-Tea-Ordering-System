@@ -52,13 +52,33 @@ class TestDrinks {
 
     @Test
     void testEquals() {
+        //test when type is not equal
         assertFalse(drinks2.equals(drinks));
+
+        //test when all fields and type are equals
         Drinks newDrinks = new Drinks(50, "Large");
         assertTrue(drinks2.equals(newDrinks));
+
+        //test when only ingredients are not equals
         drinks2.addIngredient(Ingredients.BUBBLE);
         assertFalse(drinks2.equals(newDrinks));
+
+        //test when sizes are not equals
         drinks.addIngredient(Ingredients.BUBBLE);
+        newDrinks.setSize("Small");
+        assertFalse(drinks2.equals(newDrinks));
+
+        //test when only toppings are not equals
+        newDrinks.setSize("Large");
         drinks.addToppings(Ingredients.MILK);
         assertFalse(drinks2.equals(newDrinks));
+
+        //test when only sweet level are not equals
+        drinks.setSweetness(5);
+        drinks2.addToppings(Ingredients.MILK);
+        assertFalse(drinks2.equals(newDrinks));
+
+        //test all are not equals
+        assertFalse(drinks.equals(new Drinks(30, "Medium")));
     }
 }
