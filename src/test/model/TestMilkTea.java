@@ -8,8 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestDrinks {
     Drinks drinks;
     Drinks drinks2;
+
     @BeforeEach
-    public void setUp () {
+    public void setUp() {
         drinks = new MilkTea();
         drinks2 = new Drinks(50, "Large");
         drinks.setSize("Large");
@@ -18,7 +19,7 @@ class TestDrinks {
         drinks.addIngredient(Ingredients.MILK);
         drinks.addIngredient(Ingredients.TEA);
         drinks.addToppings(Ingredients.BUBBLE);
-        ((MilkTea)drinks).setIceLevel(0);
+        ((MilkTea) drinks).setIceLevel(0);
     }
 
     @Test
@@ -27,7 +28,7 @@ class TestDrinks {
         assertEquals(50, drinks.getSweetness());
         assertEquals(3, drinks.getIngredients().size());
         assertEquals(1, drinks.getToppings().size());
-        assertEquals(0, ((MilkTea)drinks).getIceLevel());
+        assertEquals(0, ((MilkTea) drinks).getIceLevel());
 
         assertEquals(50, drinks.getSweetness());
         assertEquals("Large", drinks.getSize());
@@ -47,5 +48,12 @@ class TestDrinks {
         assertFalse(drinks2.containsBubbleAlready());
         drinks2.addIngredient(Ingredients.BUBBLE);
         assertTrue(drinks2.containsBubbleAlready());
+    }
+
+    @Test
+    void testEquals() {
+        assertFalse(drinks2.equals(drinks));
+        Drinks newDrinks = new Drinks(50, "Large");
+        assertTrue(drinks2.equals(newDrinks));
     }
 }
