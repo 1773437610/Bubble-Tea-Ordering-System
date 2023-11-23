@@ -73,12 +73,11 @@ class TestDrinks {
         //test when only ingredients are not equals
         drinks2.addIngredient(Ingredients.BUBBLE);
         assertFalse(drinks2.equals(newDrinks));
-        drinks.addIngredient(Ingredients.BUBBLE);
+        newDrinks.addIngredient(Ingredients.BUBBLE);
 
 
         //test when only toppings are not equals
-        newDrinks.setSize("Large");
-        drinks.addToppings(Ingredients.BUBBLE);
+        drinks2.addToppings(Ingredients.BUBBLE);
         assertFalse(drinks2.equals(newDrinks));
 
         //test all are not equals

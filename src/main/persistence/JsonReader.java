@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 
 import java.util.stream.Stream;
 
-import model.ingredients.Ingredients;
 import org.json.*;
 
 // Represents a reader that reads workroom from JSON data stored in file
@@ -27,7 +26,7 @@ public class JsonReader {
         Order.getOrdersHistory().clear();
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        parseOrder(jsonObject);
+        addOrder(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -39,11 +38,6 @@ public class JsonReader {
         }
 
         return contentBuilder.toString();
-    }
-
-    // EFFECTS: parses order from JSON object and returns it
-    private void parseOrder(JSONObject jsonObject) {
-        addOrder(jsonObject);
     }
 
     // MODIFIES: order
@@ -58,8 +52,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: order
-    // EFFECTS: parses Drinks from JSON object and adds it to order
+    //MODIFIES: order
+    //EFFECTS: parses Drinks from JSON object and adds it to order
     private void addDrinks(Order order, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Drinks");
         for (Object json : jsonArray) {

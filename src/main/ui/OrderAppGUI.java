@@ -1,5 +1,9 @@
 package ui;
 
+import model.Order;
+import ui.panel.OrderPanel;
+import ui.panel.OrderHistoryPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,47 +13,57 @@ import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 
 public class OrderAppGUI extends JFrame {
-    OrderApp app;
-    JMenuBar menuBar;
-    JMenu menu;
-    JMenu menu1;
-    JMenu menu2;
-    JMenuItem menuItem;
-    JMenuItem menuItem1;
+    public static final int FRAME_WIDTH = 800;
+    public static final int FRAME_HEIGHT = 500;
+    private static final boolean RESIZABLE = false;
+    private OrderApp app;
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JButton menu1;
+    private JButton menu2;
+    private JMenuItem menuItem;
+    private JMenuItem menuItem1;
+    private boolean showHistoryPanel = false;
+    private OrderHistoryPanel orderHistoryPanel;
+    private OrderPanel orderPanel;
 
     public OrderAppGUI() {
         super("OrderApp");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);
-        setUpMenu();
+        setUpMenuBar();
         try {
             app = new OrderApp(false);
         } catch (FileNotFoundException e) {
-            add(new JFrame("Error"));
+            JOptionPane.showMessageDialog(this, "Eggs are not supposed to be green.");
         }
 
-        AppPanel app = new AppPanel();
-        add(app);
-        JPanel j = new JPanel();
-        setSize(new Dimension(1000, 1000));
-        setBackground(Color.RED);
-        add(j);
+        setSize((new Dimension(FRAME_WIDTH, FRAME_HEIGHT)));
+        setResizable(RESIZABLE);
         centreOnScreen();
         setVisible(true);
+
+        orderHistoryPanel = new OrderHistoryPanel();
+        orderHistoryPanel.setVisible(false);
+        add(orderHistoryPanel);
+
+        orderPanel = new OrderPanel();
+        orderPanel.setVisible(false);
+        add(orderPanel, BorderLayout.WEST);
     }
 
-    private void setUpMenu() {
+    private void setUpMenuBar() {
         menuBar = new JMenuBar();
 
         menu = new JMenu("Menu");
         menu.setMnemonic(KeyEvent.VK_A);
         menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
 
-        menu1 = new JMenu("Show All Orders");
+        menu1 = new JButton("Show All Orders");
         menu1.setMnemonic(KeyEvent.VK_A);
         menu1.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
 
-        menu2 = new JMenu("Manage Order");
+        menu2 = new JButton("Manage Order");
         menu2.setMnemonic(KeyEvent.VK_A);
         menu2.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
 
@@ -58,7 +72,8 @@ public class OrderAppGUI extends JFrame {
         menuBar.add(menu2);
 
         setUpMenuItems();
-        setUpActionListener();
+        setUpMenuItemsActionListener();
+        setUpMenuActionListener();
 
         menu.add(menuItem);
         menu.addSeparator();
@@ -82,7 +97,7 @@ public class OrderAppGUI extends JFrame {
                 "This doesn't really do anything");
     }
 
-    private void setUpActionListener() {
+    private void setUpMenuItemsActionListener() {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,20 +111,38 @@ public class OrderAppGUI extends JFrame {
                 app.loadOrder();
             }
         });
+    }
 
+    private void setUpMenuActionListener() {
         menu1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                orderPanel.setVisible(false);
+                orderHistoryPanel.setVisible(true);
+                showOrderHistory();
             }
         });
 
         menu2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                orderPanel.setVisible(true);
+                orderHistoryPanel.setVisible(false);
             }
         });
+    }
+
+    private void showOrderHistory() {
+        DefaultListModel<String> l1 = new DefaultListModel<>();
+        System.out.println(Order.getOrdersHistory().size());
+        for (int i = 0; i < Order.getOrdersHistory().size(); i++) {
+            l1.addElement("Order " + i);
+        }
+        JList<String> list = new JList<>(l1);
+        list.setBounds(100,200, 75,75);
+        add(list);
+        setLayout(null);
+        setVisible(true);
     }
 
     // Centres frame on desktop
@@ -121,6 +154,6 @@ public class OrderAppGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        new OrderAppGUI();
+        OrderAppGUI app = new OrderAppGUI();
     }
 }

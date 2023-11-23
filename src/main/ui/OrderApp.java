@@ -16,14 +16,6 @@ public class OrderApp {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    public static void main(String[] args) {
-        try {
-            new OrderApp(true);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to run application: file not found");
-        }
-    }
-
     public OrderApp(Boolean ifRun) throws FileNotFoundException {
         input = new Scanner(System.in);
         order = new Order();
@@ -78,6 +70,14 @@ public class OrderApp {
             System.out.println("Loaded orders from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            new OrderApp(true);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to run application: file not found");
         }
     }
 }
