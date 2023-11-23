@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class OrderApp {
     private static final String JSON_STORE = "./data/order.json";
     private Scanner input;
-    private Order order;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private final Order order;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
 
     public OrderApp(Boolean ifRun) throws FileNotFoundException {
         input = new Scanner(System.in);

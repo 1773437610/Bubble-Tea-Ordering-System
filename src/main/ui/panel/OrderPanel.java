@@ -3,17 +3,15 @@ package ui.panel;
 import model.Drinks;
 import model.MilkTea;
 import model.Order;
-import ui.OrderApp;
+
 import ui.OrderAppGUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.ScrollPaneUI;
-import javax.swing.text.Style;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -24,7 +22,7 @@ public class OrderPanel extends JPanel implements ListSelectionListener {
     JButton button1;
     JLabel picLabel;
     JLabel drinksLabel;
-    JList list;
+    JList<String> list;
     String[] names;
 
     public OrderPanel() {
@@ -58,7 +56,7 @@ public class OrderPanel extends JPanel implements ListSelectionListener {
         for (int i = 0; i < itemsOrdered.size(); i++) {
             names[i] = itemsOrdered.get(i).getClass().getTypeName().substring(6);
         }
-        list = new JList(names);
+        list = new JList<>(names);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setSelectionMode(0);
         list.addListSelectionListener(this);

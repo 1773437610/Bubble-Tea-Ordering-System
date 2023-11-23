@@ -23,9 +23,8 @@ public class OrderAppGUI extends JFrame {
     private JButton menu2;
     private JMenuItem menuItem;
     private JMenuItem menuItem1;
-    private boolean showHistoryPanel = false;
-    private OrderHistoryPanel orderHistoryPanel;
-    private OrderPanel orderPanel;
+    private final OrderHistoryPanel orderHistoryPanel;
+    private final OrderPanel orderPanel;
 
     public OrderAppGUI() {
         super("OrderApp");
@@ -154,6 +153,6 @@ public class OrderAppGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        OrderAppGUI app = new OrderAppGUI();
+        new OrderAppGUI();
     }
 }

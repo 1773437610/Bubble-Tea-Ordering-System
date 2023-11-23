@@ -14,7 +14,7 @@ import org.json.*;
 // Represents a reader that reads workroom from JSON data stored in file
 // Use partial code from JsonSeriallizationDemo from course CPSC210
 public class JsonReader {
-    private String source;
+    private final String source;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
