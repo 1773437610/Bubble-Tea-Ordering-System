@@ -18,15 +18,16 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class OrderPanel extends JPanel implements ListSelectionListener {
-    JButton button;
-    JButton button1;
-    JLabel picLabel;
-    JLabel drinksLabel;
-    JList<String> list;
-    String[] names;
+    private JButton button;
+    private JButton button1;
+    private JLabel picLabel;
+    private JLabel drinksLabel;
+    private JList<String> list;
+    private String[] names;
+    private Order selectedOrder = null;
 
     public OrderPanel() {
-        setPreferredSize(new Dimension(OrderAppGUI.FRAME_WIDTH / 5, OrderAppGUI.FRAME_HEIGHT / 10));
+        //setPreferredSize(new Dimension(OrderAppGUI.FRAME_WIDTH / 5, OrderAppGUI.FRAME_HEIGHT / 10));
         //setBorder(new Border(OrderAppGUI.FRAME_WIDTH/10, OrderAppGUI.FRAME_HEIGHT/10));
         setBackground(Color.DARK_GRAY);
         button = new JButton("Add Drinks");
@@ -49,6 +50,7 @@ public class OrderPanel extends JPanel implements ListSelectionListener {
         order.addToOrdered(new MilkTea(50,50,"Medium"));
         order.addToOrdered(new Drinks(50, "Large"));
         addJScrollPane(order.getItemsOrdered());
+        setVisible(true);
     }
 
     public void addJScrollPane(ArrayList<Drinks> itemsOrdered) {
@@ -73,15 +75,12 @@ public class OrderPanel extends JPanel implements ListSelectionListener {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.GRAY);
-        g.drawRect(JPanel.WIDTH, JPanel.HEIGHT, JPanel.WIDTH / 4, JPanel.HEIGHT / 4);
+    public void valueChanged(ListSelectionEvent e) {
+        JList list = (JList)e.getSource();
+        selectedOrder = Order.getOrdersHistory().get(list.getSelectedIndex());
     }
 
-
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-
+    public Order getSelectedOrder() {
+        return selectedOrder;
     }
 }

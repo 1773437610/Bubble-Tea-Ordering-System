@@ -1,6 +1,7 @@
 package ui;
 
 import model.Order;
+import ui.panel.DrinksPanel;
 import ui.panel.OrderPanel;
 import ui.panel.OrderHistoryPanel;
 
@@ -12,6 +13,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 
+//Represent the graphical user interface for the order app
 public class OrderAppGUI extends JFrame {
     public static final int FRAME_WIDTH = 800;
     public static final int FRAME_HEIGHT = 500;
@@ -25,6 +27,8 @@ public class OrderAppGUI extends JFrame {
     private JMenuItem menuItem1;
     private final OrderHistoryPanel orderHistoryPanel;
     private final OrderPanel orderPanel;
+    private JSplitPane splitPane;
+    private JSplitPane orderDrinksPanel;
 
     public OrderAppGUI() {
         super("OrderApp");
@@ -34,21 +38,19 @@ public class OrderAppGUI extends JFrame {
         try {
             app = new OrderApp(false);
         } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(this, "Eggs are not supposed to be green.");
+            JOptionPane.showMessageDialog(this, "Errors: Files not found!");
         }
 
         setSize((new Dimension(FRAME_WIDTH, FRAME_HEIGHT)));
         setResizable(RESIZABLE);
         centreOnScreen();
-        setVisible(true);
-
         orderHistoryPanel = new OrderHistoryPanel();
-        orderHistoryPanel.setVisible(false);
-        add(orderHistoryPanel);
-
         orderPanel = new OrderPanel();
-        orderPanel.setVisible(false);
-        add(orderPanel, BorderLayout.WEST);
+        setUpSplitPane();
+        setVisible(true);
+        splitPane.setVisible(false);
+        orderHistoryPanel.setVisible(true);
+        add(orderHistoryPanel);
     }
 
     private void setUpMenuBar() {
@@ -116,16 +118,15 @@ public class OrderAppGUI extends JFrame {
         menu1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                orderPanel.setVisible(false);
+                splitPane.setVisible(false);
                 orderHistoryPanel.setVisible(true);
-                showOrderHistory();
             }
         });
 
         menu2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                orderPanel.setVisible(true);
+                splitPane.setVisible(true);
                 orderHistoryPanel.setVisible(false);
             }
         });
@@ -138,10 +139,20 @@ public class OrderAppGUI extends JFrame {
             l1.addElement("Order " + i);
         }
         JList<String> list = new JList<>(l1);
-        list.setBounds(100,200, 75,75);
+        list.setBounds(100, 200, 75, 75);
         add(list);
         setLayout(null);
         setVisible(true);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: set up the split pane and have it displayed
+    private void setUpSplitPane() {
+        orderDrinksPanel = new DrinksPanel();
+        splitPane = new JSplitPane(SwingConstants.VERTICAL, orderPanel, orderDrinksPanel);
+        splitPane.setDividerLocation(FRAME_WIDTH / 5);
+        splitPane.setContinuousLayout(true);
+        add(splitPane);
     }
 
     // Centres frame on desktop
