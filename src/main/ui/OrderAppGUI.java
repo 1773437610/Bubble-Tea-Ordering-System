@@ -1,6 +1,5 @@
 package ui;
 
-import model.Order;
 import ui.graphical.manage.AddDrinksPanel;
 import ui.graphical.manage.SelectDrinksPanel;
 import ui.graphical.history.OrderHistoryPanel;
@@ -50,6 +49,8 @@ public class OrderAppGUI extends JFrame {
         setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECTS: set up the menu bar
     private void setUpMenuBar() {
         menuBar = new JMenuBar();
 
@@ -80,6 +81,8 @@ public class OrderAppGUI extends JFrame {
         setJMenuBar(menuBar);
     }
 
+    //MODIFIES: this
+    //EFFECTS: set up the menu items under Menu
     private void setUpMenuItems() {
         save = new JMenuItem("save");
         save.setAccelerator(KeyStroke.getKeyStroke(
@@ -95,6 +98,8 @@ public class OrderAppGUI extends JFrame {
                 "This doesn't really do anything");
     }
 
+    //MODIFIES: this
+    //EFFECTS: save and load the status of the application
     private void setUpMenuItemsActionListener() {
         save.addActionListener(new ActionListener() {
             @Override
@@ -112,6 +117,8 @@ public class OrderAppGUI extends JFrame {
         });
     }
 
+    //MODIFIES: this
+    //EFFECTS: set up the menu action listener
     private void setUpMenuActionListener() {
         menu1.addActionListener(new ActionListener() {
             @Override
@@ -132,19 +139,6 @@ public class OrderAppGUI extends JFrame {
                 setVisible(true);
             }
         });
-    }
-
-    private void showOrderHistory() {
-        DefaultListModel<String> l1 = new DefaultListModel<>();
-        System.out.println(Order.getOrdersHistory().size());
-        for (int i = 0; i < Order.getOrdersHistory().size(); i++) {
-            l1.addElement("Order " + i);
-        }
-        JList<String> list = new JList<>(l1);
-        list.setBounds(100, 200, 75, 75);
-        add(list);
-        setLayout(null);
-        setVisible(true);
     }
 
     //MODIFIES: this

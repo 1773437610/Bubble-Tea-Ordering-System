@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
+//Represent the left panel for the Manage Order button
 public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
     private JScrollPane scrollPane;
     private JButton addDrinkButton;
@@ -58,6 +59,8 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
         setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECTS: set up the scroll pane for drinks
     public void setUpScrollPane() {
         scrollPane = new JScrollPane();
         scrollPane.setPreferredSize(new Dimension(130, 80));
@@ -67,6 +70,8 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
         add(scrollPane);
     }
 
+    //MODIFIES: this
+    //EFFECTS: update the drinks scroll pane based on items ordered in the order selected
     public void updateScrollPane() {
         ArrayList<Drinks> itemsOrdered = selectedOrder.getItemsOrdered();
         names = new String[itemsOrdered.size()];
@@ -86,6 +91,8 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: set the selectedDrinks by the selected item on the list
     @Override
     public void valueChanged(ListSelectionEvent e) {
         JList<String> list = (JList)e.getSource();
@@ -96,6 +103,8 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
         selectedOrder = order;
     }
 
+    //MODIFIES: this, addDrinksPanel
+    //EFFECTS: set the selected Order, update the scroll pane and update the text shown on the right
     public void setUpAddDrinkActionListener() {
         addDrinkButton.addActionListener(new ActionListener() {
             @Override
@@ -109,6 +118,7 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
         });
     }
 
+    //EFFECTS: delete the order selected on the list
     public void setUpDeleteDrinkActionListener() {
         deleteDrinkButton.addActionListener(new ActionListener() {
             @Override

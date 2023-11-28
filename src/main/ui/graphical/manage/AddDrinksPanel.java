@@ -12,27 +12,24 @@ import java.util.ArrayList;
 
 //Represents the right split pane under the manage order panel
 public class AddDrinksPanel extends JSplitPane {
-    JPanel drinkPanel;
-    JPanel ingredientPanel;
-    JSplitPane splitPane;
-    JComboBox<String> types;
-    JComboBox<Integer> iceLevel;
-    JComboBox<Integer> sweetness;
-    JComboBox<String> size;
-    JLabel sweetnessLabel;
-    String[] typesOfDrinks = {"MilkTea", "Drinks"};
-    Integer[] sweetnessList = {100, 80, 50, 20, 0};
-    Integer[] iceLevelList = {100, 80, 50, 20, 0};
-    String[] sizeList = {"Medium", "Small", "Large"};
-    ArrayList<JCheckBox> checkBoxList;
-    OrderHistoryPanel orderHistoryPanel;
-    JEditorPane textPane;
+    private final JPanel drinkPanel;
+    private JSplitPane splitPane;
+    private JComboBox<String> types;
+    private JComboBox<Integer> iceLevel;
+    private JComboBox<Integer> sweetness;
+    private JComboBox<String> size;
+    private JLabel sweetnessLabel;
+    private final String[] typesOfDrinks = {"MilkTea", "Drinks"};
+    private final Integer[] sweetnessList = {100, 80, 50, 20, 0};
+    private final Integer[] iceLevelList = {100, 80, 50, 20, 0};
+    private final String[] sizeList = {"Medium", "Small", "Large"};
+    private ArrayList<JCheckBox> checkBoxList;
+    private OrderHistoryPanel orderHistoryPanel;
+    private JEditorPane textPane;
 
-    //Represents the top panel under
     public AddDrinksPanel(OrderHistoryPanel orderHistoryPanel) {
         this.orderHistoryPanel = orderHistoryPanel;
         drinkPanel = new JPanel();
-        ingredientPanel = new JPanel();
         types = new JComboBox<>(typesOfDrinks);
         sweetness = new JComboBox<>(sweetnessList);
         iceLevel = new JComboBox<>(iceLevelList);
@@ -47,6 +44,8 @@ public class AddDrinksPanel extends JSplitPane {
         setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECTS: set up graphical components in the top of the addDrinksPanel
     public void setUpTopPane() {
         setOrientation(JSplitPane.VERTICAL_SPLIT);
         setTopComponent(drinkPanel);
@@ -65,6 +64,8 @@ public class AddDrinksPanel extends JSplitPane {
         drinkPanel.add(iceLevel);
     }
 
+    //MODIFIES: this
+    //EFFECTS: set up graphical components in the bottom of the addDrinksPanel
     public void setUpCheckBoxes() {
         JPanel left = new JPanel();
         JPanel right = new JPanel();
@@ -79,7 +80,7 @@ public class AddDrinksPanel extends JSplitPane {
             checkBoxList.add(checkBox);
             left.add(checkBox, BorderLayout.CENTER);
         }
-        //ingredientPanel.add(new JLabel("Order details:"), BorderLayout.SOUTH);
+
         right.add(textPane);
         textPane.setContentType("test/plain");
         textPane.setPreferredSize(new Dimension(300, 300));
@@ -89,6 +90,7 @@ public class AddDrinksPanel extends JSplitPane {
         setBottomComponent(splitPane);
     }
 
+    //EFFECTS: return String for the details of the selected order
     public String updateOrderDetail() {
 
         String text = "Order detail:\n";
@@ -113,6 +115,7 @@ public class AddDrinksPanel extends JSplitPane {
         return text;
     }
 
+    //EFFECTS: return an arrayList of Ingredients selected in check boxes
     public ArrayList<Ingredients> getSelectedToppings() {
         ArrayList<Ingredients> array = new ArrayList<>();
 
@@ -125,6 +128,7 @@ public class AddDrinksPanel extends JSplitPane {
         return array;
     }
 
+    //EFFECTS: return a new drink that is customized by user
     public Drinks getNewDrinksCreated() {
         int iceLevelValue = ((Integer) iceLevel.getSelectedItem());
         int sweetnessValue = ((Integer)sweetness.getSelectedItem());
@@ -141,6 +145,8 @@ public class AddDrinksPanel extends JSplitPane {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: add Ingredients selected by user to drink
     public void addSelectedToppingToDrink(Drinks drink) {
         ArrayList<Ingredients> array = getSelectedToppings();
 
