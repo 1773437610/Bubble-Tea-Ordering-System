@@ -84,10 +84,10 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
         list.addListSelectionListener(this);
         list.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 
-        scrollPane.setColumnHeaderView(list);
-        scrollPane.setVerticalScrollBar(new JScrollBar(JScrollBar.VERTICAL));
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setWheelScrollingEnabled(true);
+        scrollPane.setViewportView(list);
+        //scrollPane.setVerticalScrollBar(new JScrollBar(JScrollBar.VERTICAL));
+        //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        //scrollPane.setWheelScrollingEnabled(true);
 
     }
 

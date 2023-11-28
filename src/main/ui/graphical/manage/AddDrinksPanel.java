@@ -25,6 +25,7 @@ public class AddDrinksPanel extends JSplitPane {
     private final String[] sizeList = {"Medium", "Small", "Large"};
     private ArrayList<JCheckBox> checkBoxList;
     private OrderHistoryPanel orderHistoryPanel;
+    private JScrollPane textPaneScrollContainer;
     private JEditorPane textPane;
 
     public AddDrinksPanel(OrderHistoryPanel orderHistoryPanel) {
@@ -36,6 +37,7 @@ public class AddDrinksPanel extends JSplitPane {
         size = new JComboBox<>(sizeList);
         checkBoxList = new ArrayList<>();
         textPane = new JEditorPane();
+        textPaneScrollContainer = new JScrollPane();
 
         setUpTopPane();
 
@@ -81,7 +83,9 @@ public class AddDrinksPanel extends JSplitPane {
             left.add(checkBox, BorderLayout.CENTER);
         }
 
-        right.add(textPane);
+        right.add(textPaneScrollContainer);
+        textPaneScrollContainer.setViewportView(textPane);
+        textPaneScrollContainer.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         textPane.setContentType("test/plain");
         textPane.setPreferredSize(new Dimension(300, 300));
         textPane.setText(updateOrderDetail());
