@@ -15,3 +15,22 @@ and enhances *user experience*.
 - As a user, when I start the application, I want to be given the option to load my previous orders from files.
 
 An example of text with **bold** and *italic* fonts.  
+
+# Instructions for Grader
+
+- **You can generate the first required action related to the user story "adding multiple Xs to a Y" by:**
+- 1.Click on the button Show All Orders on the top.
+- 2.Click on Add Order and select the order added.
+- 3.Click on the button Manage Order
+- 4.Select the preferred customization for you drink and click on Add Drink button.
+
+
+- **You can generate the second required action related to the user story "adding multiple Xs to a Y" by:**
+- Repeating the instruction for step 4 and the subset of Xs will be displayed on the right panel.
+
+- **You can locate my visual component by clicking on Manage Order.**
+
+- **You can save the state of my application by clicking on the Menu button located on the top-left of the screen
+- and click on save.**
+
+- **You can reload the state of my application by clicking on the Menu and load.**
