@@ -1,4 +1,4 @@
-package ui;
+package ui.text;
 
 import model.Drinks;
 import model.ingredients.Ingredients;

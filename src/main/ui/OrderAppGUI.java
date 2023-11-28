@@ -1,9 +1,9 @@
 package ui;
 
 import model.Order;
-import ui.panel.DrinksPanel;
-import ui.panel.OrderPanel;
-import ui.panel.OrderHistoryPanel;
+import ui.graphical.manage.AddDrinksPanel;
+import ui.graphical.manage.SelectDrinksPanel;
+import ui.graphical.history.OrderHistoryPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,10 +25,10 @@ public class OrderAppGUI extends JFrame {
     private JButton menu2;
     private JMenuItem menuItem;
     private JMenuItem menuItem1;
-    private final OrderHistoryPanel orderHistoryPanel;
-    private final OrderPanel orderPanel;
-    private JSplitPane splitPane;
-    private JSplitPane orderDrinksPanel;
+    private OrderHistoryPanel orderHistoryPanel;
+    private SelectDrinksPanel selectDrinksPanel;
+    private JSplitPane manageOrderSplitPanel;
+    private AddDrinksPanel orderAddDrinksPanel;
 
     public OrderAppGUI() {
         super("OrderApp");
@@ -44,13 +44,10 @@ public class OrderAppGUI extends JFrame {
         setSize((new Dimension(FRAME_WIDTH, FRAME_HEIGHT)));
         setResizable(RESIZABLE);
         centreOnScreen();
-        orderHistoryPanel = new OrderHistoryPanel();
-        orderPanel = new OrderPanel();
+
         setUpSplitPane();
+
         setVisible(true);
-        splitPane.setVisible(false);
-        orderHistoryPanel.setVisible(true);
-        add(orderHistoryPanel);
     }
 
     private void setUpMenuBar() {
@@ -118,16 +115,20 @@ public class OrderAppGUI extends JFrame {
         menu1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                splitPane.setVisible(false);
-                orderHistoryPanel.setVisible(true);
+                remove(manageOrderSplitPanel);
+                add(orderHistoryPanel);
+                repaint();
+                setVisible(true);
             }
         });
 
         menu2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                splitPane.setVisible(true);
-                orderHistoryPanel.setVisible(false);
+                remove(orderHistoryPanel);
+                add(manageOrderSplitPanel);
+                repaint();
+                setVisible(true);
             }
         });
     }
@@ -148,11 +149,16 @@ public class OrderAppGUI extends JFrame {
     //MODIFIES: this
     //EFFECTS: set up the split pane and have it displayed
     private void setUpSplitPane() {
-        orderDrinksPanel = new DrinksPanel();
-        splitPane = new JSplitPane(SwingConstants.VERTICAL, orderPanel, orderDrinksPanel);
-        splitPane.setDividerLocation(FRAME_WIDTH / 5);
-        splitPane.setContinuousLayout(true);
-        add(splitPane);
+        orderHistoryPanel = new OrderHistoryPanel();
+        orderAddDrinksPanel = new AddDrinksPanel(orderHistoryPanel);
+        selectDrinksPanel = new SelectDrinksPanel(orderAddDrinksPanel);
+        orderHistoryPanel.setOrderPanel(selectDrinksPanel);
+
+        manageOrderSplitPanel = new JSplitPane(SwingConstants.VERTICAL, selectDrinksPanel, orderAddDrinksPanel);
+        manageOrderSplitPanel.setDividerLocation(FRAME_WIDTH / 5);
+        manageOrderSplitPanel.setContinuousLayout(true);
+
+        add(manageOrderSplitPanel);
     }
 
     // Centres frame on desktop

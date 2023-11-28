@@ -1,4 +1,4 @@
-package ui;
+package ui.text;
 
 import model.Drinks;
 import model.MilkTea;
@@ -9,7 +9,6 @@ import java.util.Scanner;
 //Represent the modifying of Orders
 public class ModifyOrders {
     public static void modifyOrder() {
-        Scanner input = new Scanner(System.in);
         Order order = new Order();
         addDrinks(order);
         Order.addToOrdersHistory(order);

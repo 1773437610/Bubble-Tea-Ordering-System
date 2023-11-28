@@ -29,6 +29,12 @@ public class Order implements Writable {
         orderHistory.add(order);
     }
 
+    //MODIFIES: this
+    //EFFECTS: delete the order in ordersHistory
+    public static void deleteOrdersHistory(int position) {
+        orderHistory.remove(position);
+    }
+
     public ArrayList<Drinks> getItemsOrdered() {
         return itemsOrdered;
     }
