@@ -1,6 +1,7 @@
 package ui.graphical.history;
 
 import model.Order;
+import ui.OrderAppGUI;
 import ui.graphical.manage.AddDrinksPanel;
 import ui.graphical.manage.SelectDrinksPanel;
 
@@ -13,6 +14,7 @@ import java.awt.event.ActionListener;
 
 //Represents the order history panel for the button show all orders
 public class OrderHistoryPanel extends JSplitPane implements ListSelectionListener {
+    private OrderAppGUI mainFrame;
     private SelectDrinksPanel selectDrinksPanel;
     private AddDrinksPanel addDrinksPanel;
     private JPanel leftPane;
@@ -26,7 +28,8 @@ public class OrderHistoryPanel extends JSplitPane implements ListSelectionListen
     private int selectedOrderNum;
     private Order selectedOrder;
 
-    public OrderHistoryPanel() {
+    public OrderHistoryPanel(OrderAppGUI mainFrame) {
+        this.mainFrame = mainFrame;
         rightTextPane = new JEditorPane();
         leftPane = new JPanel();
         addOrder = new JButton("Add Order");
@@ -73,6 +76,8 @@ public class OrderHistoryPanel extends JSplitPane implements ListSelectionListen
         selectDrinksPanel.setSelectedOrder(selectedOrder);
         selectDrinksPanel.updateScrollPane();
         addDrinksPanel.getTextPane().setText(addDrinksPanel.updateOrderDetail());
+        mainFrame.getDeleteOrderButton().doClick(250);
+
     }
 
     //MODIFIES: this

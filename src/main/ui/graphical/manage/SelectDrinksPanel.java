@@ -85,10 +85,6 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
         list.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 
         scrollPane.setViewportView(list);
-        //scrollPane.setVerticalScrollBar(new JScrollBar(JScrollBar.VERTICAL));
-        //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        //scrollPane.setWheelScrollingEnabled(true);
-
     }
 
     //MODIFIES: this

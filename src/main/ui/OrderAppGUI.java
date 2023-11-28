@@ -20,8 +20,8 @@ public class OrderAppGUI extends JFrame {
     private OrderApp app;
     private JMenuBar menuBar;
     private JMenu menu;
-    private JButton menu1;
-    private JButton menu2;
+    private JButton addOrderButton;
+    private JButton deleteOrderButton;
     private JMenuItem save;
     private JMenuItem load;
     private OrderHistoryPanel orderHistoryPanel;
@@ -56,19 +56,16 @@ public class OrderAppGUI extends JFrame {
 
         menu = new JMenu("Menu");
         menu.setMnemonic(KeyEvent.VK_A);
-        menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
 
-        menu1 = new JButton("Show All Orders");
-        menu1.setMnemonic(KeyEvent.VK_A);
-        menu1.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
+        addOrderButton = new JButton("Show All Orders");
+        addOrderButton.setMnemonic(KeyEvent.VK_A);
 
-        menu2 = new JButton("Manage Order");
-        menu2.setMnemonic(KeyEvent.VK_A);
-        menu2.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
+        deleteOrderButton = new JButton("Manage Order");
+        deleteOrderButton.setMnemonic(KeyEvent.VK_A);
 
         menuBar.add(menu);
-        menuBar.add(menu1);
-        menuBar.add(menu2);
+        menuBar.add(addOrderButton);
+        menuBar.add(deleteOrderButton);
 
         setUpMenuItems();
         setUpMenuItemsActionListener();
@@ -120,7 +117,7 @@ public class OrderAppGUI extends JFrame {
     //MODIFIES: this
     //EFFECTS: set up the menu action listener
     private void setUpMenuActionListener() {
-        menu1.addActionListener(new ActionListener() {
+        addOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 remove(manageOrderSplitPanel);
@@ -130,7 +127,7 @@ public class OrderAppGUI extends JFrame {
             }
         });
 
-        menu2.addActionListener(new ActionListener() {
+        deleteOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 remove(orderHistoryPanel);
@@ -144,7 +141,7 @@ public class OrderAppGUI extends JFrame {
     //MODIFIES: this
     //EFFECTS: set up the split pane and have it displayed
     private void setUpSplitPane() {
-        orderHistoryPanel = new OrderHistoryPanel();
+        orderHistoryPanel = new OrderHistoryPanel(this);
         orderAddDrinksPanel = new AddDrinksPanel(orderHistoryPanel);
         selectDrinksPanel = new SelectDrinksPanel(orderAddDrinksPanel);
         orderHistoryPanel.setOrderPanel(selectDrinksPanel);
@@ -163,6 +160,10 @@ public class OrderAppGUI extends JFrame {
     private void centreOnScreen() {
         Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
+    }
+
+    public JButton getDeleteOrderButton() {
+        return deleteOrderButton;
     }
 
     public static void main(String[] args) {
