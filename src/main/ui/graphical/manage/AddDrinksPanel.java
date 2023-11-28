@@ -24,7 +24,6 @@ public class AddDrinksPanel extends JSplitPane {
     Integer[] sweetnessList = {100, 80, 50, 20, 0};
     Integer[] iceLevelList = {100, 80, 50, 20, 0};
     String[] sizeList = {"Medium", "Small", "Large"};
-    JButton addButton;
     ArrayList<JCheckBox> checkBoxList;
     OrderHistoryPanel orderHistoryPanel;
     JEditorPane textPane;
@@ -38,7 +37,6 @@ public class AddDrinksPanel extends JSplitPane {
         sweetness = new JComboBox<>(sweetnessList);
         iceLevel = new JComboBox<>(iceLevelList);
         size = new JComboBox<>(sizeList);
-        addButton = new JButton("add drink");
         checkBoxList = new ArrayList<>();
         textPane = new JEditorPane();
 
@@ -81,7 +79,6 @@ public class AddDrinksPanel extends JSplitPane {
             checkBoxList.add(checkBox);
             left.add(checkBox, BorderLayout.CENTER);
         }
-        drinkPanel.add(addButton, BorderLayout.SOUTH);
         //ingredientPanel.add(new JLabel("Order details:"), BorderLayout.SOUTH);
         right.add(textPane);
         textPane.setContentType("test/plain");
