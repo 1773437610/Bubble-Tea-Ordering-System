@@ -23,8 +23,8 @@ public class OrderAppGUI extends JFrame {
     private JMenu menu;
     private JButton menu1;
     private JButton menu2;
-    private JMenuItem menuItem;
-    private JMenuItem menuItem1;
+    private JMenuItem save;
+    private JMenuItem load;
     private OrderHistoryPanel orderHistoryPanel;
     private SelectDrinksPanel selectDrinksPanel;
     private JSplitPane manageOrderSplitPanel;
@@ -73,40 +73,41 @@ public class OrderAppGUI extends JFrame {
         setUpMenuItemsActionListener();
         setUpMenuActionListener();
 
-        menu.add(menuItem);
+        menu.add(save);
         menu.addSeparator();
-        menu.add(menuItem1);
+        menu.add(load);
 
         setJMenuBar(menuBar);
     }
 
     private void setUpMenuItems() {
-        menuItem = new JMenuItem("save");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(
+        save = new JMenuItem("save");
+        save.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_S, InputEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription(
+        save.getAccessibleContext().setAccessibleDescription(
                 "This doesn't really do anything");
-        menu.add(menuItem);
+        menu.add(save);
 
-        menuItem1 = new JMenuItem("load");
-        menuItem1.setAccelerator(KeyStroke.getKeyStroke(
+        load = new JMenuItem("load");
+        load.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_L, InputEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription(
+        save.getAccessibleContext().setAccessibleDescription(
                 "This doesn't really do anything");
     }
 
     private void setUpMenuItemsActionListener() {
-        menuItem.addActionListener(new ActionListener() {
+        save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 app.saveOrder();
             }
         });
 
-        menuItem1.addActionListener(new ActionListener() {
+        load.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 app.loadOrder();
+                orderHistoryPanel.updateOrderListScrollPane();
             }
         });
     }
@@ -153,6 +154,7 @@ public class OrderAppGUI extends JFrame {
         orderAddDrinksPanel = new AddDrinksPanel(orderHistoryPanel);
         selectDrinksPanel = new SelectDrinksPanel(orderAddDrinksPanel);
         orderHistoryPanel.setOrderPanel(selectDrinksPanel);
+        orderHistoryPanel.setAddDrinksPanel(orderAddDrinksPanel);
 
         manageOrderSplitPanel = new JSplitPane(SwingConstants.VERTICAL, selectDrinksPanel, orderAddDrinksPanel);
         manageOrderSplitPanel.setDividerLocation(FRAME_WIDTH / 5);

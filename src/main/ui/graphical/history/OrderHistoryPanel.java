@@ -1,6 +1,7 @@
 package ui.graphical.history;
 
 import model.Order;
+import ui.graphical.manage.AddDrinksPanel;
 import ui.graphical.manage.SelectDrinksPanel;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ import java.awt.event.ActionListener;
 
 public class OrderHistoryPanel extends JSplitPane implements ListSelectionListener {
     SelectDrinksPanel selectDrinksPanel;
+    AddDrinksPanel addDrinksPanel;
     JPanel leftPane;
     JEditorPane rightTextPane;
     JList<String> list;
@@ -66,6 +68,7 @@ public class OrderHistoryPanel extends JSplitPane implements ListSelectionListen
         updateSelectedOrder(selectedOrderNum);
         selectDrinksPanel.setSelectedOrder(selectedOrder);
         selectDrinksPanel.updateScrollPane();
+        addDrinksPanel.getTextPane().setText(addDrinksPanel.updateOrderDetail());
     }
 
     public void updateSelectedOrder(int selectedIndex) {
@@ -100,5 +103,9 @@ public class OrderHistoryPanel extends JSplitPane implements ListSelectionListen
 
     public Order getSelectedOrder() {
         return selectedOrder;
+    }
+
+    public void setAddDrinksPanel(AddDrinksPanel orderAddDrinksPanel) {
+        this.addDrinksPanel = orderAddDrinksPanel;
     }
 }
