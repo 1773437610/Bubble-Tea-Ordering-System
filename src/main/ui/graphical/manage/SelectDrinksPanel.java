@@ -118,6 +118,7 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
                 if (selectedDrink != null) {
                     selectedOrder.deleteDrink(selectedDrink);
                     updateScrollPane();
+                    addDrinksPanel.getTextPane().setText(addDrinksPanel.updateOrderDetail());
                 }
             }
         });
