@@ -1,4 +1,4 @@
-package ui.graphical.history;
+package ui.graphical;
 
 import model.Order;
 import ui.OrderAppGUI;

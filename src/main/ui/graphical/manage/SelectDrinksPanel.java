@@ -54,14 +54,11 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: set up the scroll pane for drinks
-    public void setUpScrollPane() {
-        scrollPane = new JScrollPane();
-        scrollPane.setPreferredSize(new Dimension(130, 80));
-        scrollPane.setBorder(BorderFactory.createLineBorder(Color.ORANGE));
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setWheelScrollingEnabled(true);
-        add(scrollPane);
+    //EFFECTS: set the selectedDrinks by the selected item on the list
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        JList list = (JList)e.getSource();
+        selectedDrink = selectedOrder.getItemsOrdered().get(list.getSelectedIndex());
     }
 
     //MODIFIES: this
@@ -84,15 +81,14 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: set the selectedDrinks by the selected item on the list
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        JList list = (JList)e.getSource();
-        selectedDrink = selectedOrder.getItemsOrdered().get(list.getSelectedIndex());
-    }
-
-    public void setSelectedOrder(Order order) {
-        selectedOrder = order;
+    //EFFECTS: set up the scroll pane for drinks
+    public void setUpScrollPane() {
+        scrollPane = new JScrollPane();
+        scrollPane.setPreferredSize(new Dimension(130, 80));
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.ORANGE));
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setWheelScrollingEnabled(true);
+        add(scrollPane);
     }
 
     //MODIFIES: this, addDrinksPanel
@@ -124,4 +120,7 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
         });
     }
 
+    public void setSelectedOrder(Order order) {
+        selectedOrder = order;
+    }
 }

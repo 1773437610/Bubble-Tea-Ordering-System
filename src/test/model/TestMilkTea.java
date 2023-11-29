@@ -1,6 +1,5 @@
 package model;
 
-import model.ingredients.Ingredients;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -3,7 +3,7 @@ package model;
 import java.util.Calendar;
 import java.util.Date;
 
-
+//Used code from UBC provided file
 /**
  * Represents an alarm system event.
  */

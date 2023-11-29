@@ -1,7 +1,7 @@
 package ui.text;
 
 import model.Drinks;
-import model.ingredients.Ingredients;
+import model.Ingredients;
 
 import java.util.Scanner;
 

@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads Order from JSON data stored in file
 // Use partial code from JsonSeriallizationDemo from course CPSC210
 public class JsonReader {
     private final String source;

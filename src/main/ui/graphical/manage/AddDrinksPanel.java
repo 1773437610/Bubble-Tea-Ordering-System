@@ -2,9 +2,9 @@ package ui.graphical.manage;
 
 import model.Drinks;
 import model.MilkTea;
-import model.ingredients.Ingredients;
+import model.Ingredients;
 import ui.OrderAppGUI;
-import ui.graphical.history.OrderHistoryPanel;
+import ui.graphical.OrderHistoryPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -127,7 +127,7 @@ public class AddDrinksPanel extends JSplitPane {
         }
     }
 
-    //EFFECTS:
+    //EFFECTS: return a string of order detail
     public String updateOrderDetail() {
         if (orderHistoryPanel.getSelectedOrder() != null) {
             return orderHistoryPanel.getSelectedOrder().showOrderDetails();

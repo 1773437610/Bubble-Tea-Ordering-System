@@ -1,6 +1,5 @@
 package model;
 
-import model.ingredients.Ingredients;
 import org.json.JSONObject;
 import persistence.Writable;
 

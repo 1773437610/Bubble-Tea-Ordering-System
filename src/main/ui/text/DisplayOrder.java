@@ -3,7 +3,7 @@ package ui.text;
 import model.Drinks;
 import model.MilkTea;
 import model.Order;
-import model.ingredients.Ingredients;
+import model.Ingredients;
 
 import java.util.ArrayList;
 

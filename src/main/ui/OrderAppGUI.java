@@ -4,7 +4,7 @@ import model.Event;
 import model.EventLog;
 import ui.graphical.manage.AddDrinksPanel;
 import ui.graphical.manage.SelectDrinksPanel;
-import ui.graphical.history.OrderHistoryPanel;
+import ui.graphical.OrderHistoryPanel;
 
 import javax.swing.*;
 import java.awt.*;

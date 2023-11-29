@@ -15,32 +15,29 @@ and enhances *user experience*.
 - As a user, when I close the application, I want to be able to save the orders to files.
 - As a user, when I start the application, I want to be given the option to load my previous orders from files.
 
-An example of text with **bold** and *italic* fonts.  
-
-
 # Instructions for Grader
 
-- **You can generate the first required action related to the user story "adding multiple Xs to a Y" by:**
-- 1.Click on the button Show All Orders on the top.
-- 2.Click on Add Order and select the order added.
-- 3.Click on the button Manage Order
-- 4.Select the preferred customization for you drink and click on Add Drink button.
+**You can generate the first required action related to the user story "adding multiple Xs to a Y" by:**
+1.Click on the button Show All Orders on the top.
+2.Click on Add Order and select the order added.
+3.Click on the button Manage Order
+4.Select the preferred customization for you drink and click on Add Drink button.
 
-- **You can generate the second required action related to the user story "adding multiple Xs to a Y" by:**
-- 1.Click on the button Show All Orders on the top.
-- 2.Click on Add Order and select the order added.
-- 3.Click on the button Manage Order
-- 4.Select the preferred customization for you drink and click on Delete Drink button.
+**You can generate the second required action related to the user story "adding multiple Xs to a Y" by:**
+1.Click on the button Show All Orders on the top.
+2.Click on Add Order and select the order added.
+3.Click on the button Manage Order
+4.Select the preferred customization for you drink and click on Delete Drink button.
 
-- **You can generate the displayed all Xs in Y action by:**
-- Repeating the instruction for step 4 multiple times and each time Xs will be displayed on the right panel.
+**You can generate the displayed all Xs in Y action by:**
+Repeating the instruction for step 4 multiple times and each time Xs will be displayed on the right panel.
 
-- **You can locate my visual component by clicking on Manage Order.**
+**You can locate my visual component by clicking on Manage Order.**
 
-- **You can save the state of my application by clicking on the Menu button located on the top-left of the screen
-- and click on save.**
+**You can save the state of my application by clicking on the Menu button located on the top-left of the screen
+and click on save.**
 
-- **You can reload the state of my application by clicking on the Menu and load.**
+**You can reload the state of my application by clicking on the Menu and load.**
 
 
 # Phase 4: Task 2
@@ -67,3 +64,10 @@ MilkTea deleted from order.
 
 Tue Nov 28 22:15:51 PST 2023
 Drink at 0 removed from order.
+
+
+# Phase 4: Task 3
+The refactoring I might use to improve my design is to make OrderHistoryPanel, AddDrinksPanel and
+SelectDrinksPanel to communicate through OrderAppGUI so that the relationship can be less complicated and
+easy to maintain the relationship in future updates.
+
