@@ -6,20 +6,18 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class JsonWriterTest extends JsonTest {
     @BeforeEach
     void setUp() {
-        Order.getOrdersHistory().clear();
+        Order.getOrderHistory().clear();
     }
 
     @Test
     void testWriterInvalidFile() {
         try {
-            Order order = new Order();
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");
@@ -32,9 +30,9 @@ class JsonWriterTest extends JsonTest {
     void testWriterOrderWithOneDrink() {
         try {
             Order order = new Order();
-            Order.addToOrdersHistory(order);
+            Order.addToOrderHistory(order);
             Drinks drink = new Drinks(5,"Medium");
-            order.addToOrdered(drink);
+            order.addDrink(drink);
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyOrders.json");
             writer.open();
             writer.write(order);
@@ -42,7 +40,7 @@ class JsonWriterTest extends JsonTest {
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyOrders.json");
             reader.read();
-            ArrayList<Order> list = Order.getOrdersHistory();
+            ArrayList<Order> list = Order.getOrderHistory();
             assertEquals(1, list.size());
             assertEquals(1, list.get(0).getItemsOrdered().size());
             assertTrue(drink.equals(list.get(0).getItemsOrdered().get(0)));
@@ -60,12 +58,12 @@ class JsonWriterTest extends JsonTest {
             Drinks drink = new Drinks(100, "Large");
             Drinks drink1 = new MilkTea(50, 50, "Small");
 
-            order.addToOrdered(drink);
-            order.addToOrdered(drink1);
-            order1.addToOrdered(drink1);
-            order1.addToOrdered(drink);
-            Order.addToOrdersHistory(order);
-            Order.addToOrdersHistory(order1);
+            order.addDrink(drink);
+            order.addDrink(drink1);
+            order1.addDrink(drink1);
+            order1.addDrink(drink);
+            Order.addToOrderHistory(order);
+            Order.addToOrderHistory(order1);
 
             ArrayList<Drinks> drinksList = new ArrayList<>();
             drinksList.add(drink);
@@ -82,7 +80,7 @@ class JsonWriterTest extends JsonTest {
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralOrders.json");
             reader.read();
-            ArrayList<Order> list = Order.getOrdersHistory();
+            ArrayList<Order> list = Order.getOrderHistory();
             assertEquals(2, list.size());
             assertEquals(2, list.get(0).getItemsOrdered().size());
             assertEquals(2, list.get(1).getItemsOrdered().size());

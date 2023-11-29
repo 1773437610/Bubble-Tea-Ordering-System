@@ -23,7 +23,7 @@ public class JsonReader {
 
     // EFFECTS: throws IOException if an error occurs reading data from file
     public void read() throws IOException {
-        Order.getOrdersHistory().clear();
+        Order.getOrderHistory().clear();
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         addOrder(jsonObject);
@@ -47,7 +47,7 @@ public class JsonReader {
         for (Object json : jsonArray) {
             JSONObject currOrder = (JSONObject) json;
             Order order = new Order();
-            Order.addToOrdersHistory(order);
+            Order.addToOrderHistory(order);
             addDrinks(order, currOrder);
         }
     }
@@ -62,11 +62,11 @@ public class JsonReader {
                 int icelevel = currDrinks.getInt("icelevel");
                 int sweetness = currDrinks.getInt("sweetness");
                 String size = currDrinks.getString("size");
-                order.addToOrdered(new MilkTea(icelevel, sweetness, size));
+                order.addDrink(new MilkTea(icelevel, sweetness, size));
             } else if (currDrinks.getString("Type").equals("class model.Drinks")) {
                 int sweetness = currDrinks.getInt("sweetness");
                 String size = currDrinks.getString("size");
-                order.addToOrdered(new Drinks(sweetness, size));
+                order.addDrink(new Drinks(sweetness, size));
             }
         }
     }

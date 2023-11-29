@@ -12,7 +12,7 @@ public class DisplayOrder {
 
     //EFFECTS: display all the order to the console
     public static void displayAllOrder() {
-        ArrayList<Order> orders = Order.getOrdersHistory();
+        ArrayList<Order> orders = Order.getOrderHistory();
         System.out.println("Order History---------------------------\n\n");
         for (int i = 0; i < orders.size(); i++) {
             System.out.println("Order " + (i + 1) + "\n------------------------");

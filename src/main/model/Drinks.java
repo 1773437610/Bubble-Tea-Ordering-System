@@ -13,6 +13,7 @@ public class Drinks implements Writable {
     private int sweetness;
     private String size;
     private JSONObject json;
+    private static final String name = "Drinks";
 
     //MODIFIES: this
     //EFFECTS: initialize fields
@@ -98,5 +99,9 @@ public class Drinks implements Writable {
     //EFFECTS: return true if two arraylist printing out the same result
     public boolean compareArray(ArrayList<Ingredients> array1, ArrayList<Ingredients> array2) {
         return (array1.toString().equals(array2.toString()));
+    }
+
+    public String toString() {
+        return name;
     }
 }

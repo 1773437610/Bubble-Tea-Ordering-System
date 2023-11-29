@@ -1,7 +1,6 @@
 package ui.graphical.manage;
 
 import model.Drinks;
-import model.MilkTea;
 import model.Order;
 
 
@@ -20,23 +19,21 @@ import java.util.ArrayList;
 
 //Represent the left panel for the Manage Order button
 public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
+    private final JButton addDrinkButton;
+    private final JButton deleteDrinkButton;
+    private final AddDrinksPanel addDrinksPanel;
     private JScrollPane scrollPane;
-    private JButton addDrinkButton;
-    private JButton deleteDrinkButton;
     private JLabel picLabel;
-    private JLabel drinksLabel;
-    private JList<String> list;
-    private String[] names;
     private Order selectedOrder = null;
-    private Drinks selectedDrinks = null;
-    private AddDrinksPanel addDrinksPanel;
+    private Drinks selectedDrink = null;
+
 
     public SelectDrinksPanel(AddDrinksPanel addDrinksPanel) {
         setBackground(Color.DARK_GRAY);
         this.addDrinksPanel = addDrinksPanel;
         addDrinkButton = new JButton("Add Drinks");
         deleteDrinkButton = new JButton("Delete Drinks");
-        drinksLabel = new JLabel("Drinks Ordered:");
+        JLabel drinksLabel = new JLabel("Drinks Ordered:");
         drinksLabel.setForeground(Color.WHITE);
         try {
             BufferedImage picture = ImageIO.read(new File("./data/Image.jpeg"));
@@ -50,9 +47,6 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
         add(picLabel);
         add(drinksLabel);
 
-        Order order = new Order();
-        order.addToOrdered(new MilkTea(50,50,"Medium"));
-        order.addToOrdered(new Drinks(50, "Large"));
         setUpScrollPane();
         setUpAddDrinkActionListener();
         setUpDeleteDrinkActionListener();
@@ -73,6 +67,8 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
     //MODIFIES: this
     //EFFECTS: update the drinks scroll pane based on items ordered in the order selected
     public void updateScrollPane() {
+        JList<String> list;
+        String[] names;
         ArrayList<Drinks> itemsOrdered = selectedOrder.getItemsOrdered();
         names = new String[itemsOrdered.size()];
         for (int i = 0; i < itemsOrdered.size(); i++) {
@@ -91,8 +87,8 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
     //EFFECTS: set the selectedDrinks by the selected item on the list
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        JList<String> list = (JList)e.getSource();
-        selectedDrinks = selectedOrder.getItemsOrdered().get(list.getSelectedIndex());
+        JList list = (JList)e.getSource();
+        selectedDrink = selectedOrder.getItemsOrdered().get(list.getSelectedIndex());
     }
 
     public void setSelectedOrder(Order order) {
@@ -106,7 +102,7 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (selectedOrder != null) {
-                    selectedOrder.addToOrdered(addDrinksPanel.getNewDrinksCreated());
+                    selectedOrder.addDrink(addDrinksPanel.getNewDrinksCreated());
                     updateScrollPane();
                     addDrinksPanel.getTextPane().setText(addDrinksPanel.updateOrderDetail());
                 }
@@ -119,8 +115,8 @@ public class SelectDrinksPanel extends JPanel implements ListSelectionListener {
         deleteDrinkButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (selectedDrinks != null) {
-                    selectedOrder.getItemsOrdered().remove(selectedDrinks);
+                if (selectedDrink != null) {
+                    selectedOrder.deleteDrink(selectedDrink);
                     updateScrollPane();
                 }
             }

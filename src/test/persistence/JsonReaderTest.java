@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class JsonReaderTest extends JsonTest {
     @BeforeEach
     void setUp() {
-        Order.getOrdersHistory().clear();
+        Order.getOrderHistory().clear();
     }
 
     @Test
@@ -32,7 +32,7 @@ class JsonReaderTest extends JsonTest {
         JsonReader reader = new JsonReader("./data/testReaderEmptyOrders.json");
         try {
             reader.read();
-            assertEquals(0, Order.getOrdersHistory().size());
+            assertEquals(0, Order.getOrderHistory().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
@@ -44,7 +44,7 @@ class JsonReaderTest extends JsonTest {
         JsonReader reader = new JsonReader("./data/testReaderGeneralOrders.json");
         try {
             reader.read();
-            List<Order> orders = Order.getOrdersHistory();
+            List<Order> orders = Order.getOrderHistory();
             assertEquals(2, orders.size());
 
             ArrayList<Drinks> order1 = new ArrayList<>();

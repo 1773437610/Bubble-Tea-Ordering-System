@@ -1,15 +1,14 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import ui.graphical.manage.AddDrinksPanel;
 import ui.graphical.manage.SelectDrinksPanel;
 import ui.graphical.history.OrderHistoryPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 
 //Represent the graphical user interface for the order app
@@ -31,7 +30,18 @@ public class OrderAppGUI extends JFrame {
 
     public OrderAppGUI() {
         super("OrderApp");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        WindowListener closeAction = new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosed(e);
+                printLog();
+                System.exit(0);
+            }
+        };
+        addWindowListener(closeAction);
+
         setUndecorated(false);
         setUpMenuBar();
         try {
@@ -84,15 +94,11 @@ public class OrderAppGUI extends JFrame {
         save = new JMenuItem("save");
         save.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_S, InputEvent.ALT_MASK));
-        save.getAccessibleContext().setAccessibleDescription(
-                "This doesn't really do anything");
         menu.add(save);
 
         load = new JMenuItem("load");
         load.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_L, InputEvent.ALT_MASK));
-        save.getAccessibleContext().setAccessibleDescription(
-                "This doesn't really do anything");
     }
 
     //MODIFIES: this
@@ -164,6 +170,15 @@ public class OrderAppGUI extends JFrame {
 
     public JButton getDeleteOrderButton() {
         return deleteOrderButton;
+    }
+
+    //EFFECTS: print to the console all the events that have been logged since app started
+    public void printLog() {
+        for (Event next : EventLog.getInstance()) {
+            System.out.print(next.toString() + "\n\n");
+        }
+
+        repaint();
     }
 
     public static void main(String[] args) {

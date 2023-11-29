@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 //Represents milk tea
 public class MilkTea extends Drinks {
+    private static final String name = "MilkTea";
     private int iceLevel;
 
     //MODIFIES: this
@@ -41,5 +42,11 @@ public class MilkTea extends Drinks {
         super.toJson();
         getJson().put("icelevel", iceLevel);
         return getJson();
+    }
+
+    //EFFECTS: return the name for this object;
+    @Override
+    public String toString() {
+        return name;
     }
 }

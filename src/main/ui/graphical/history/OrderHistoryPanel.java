@@ -14,32 +14,40 @@ import java.awt.event.ActionListener;
 
 //Represents the order history panel for the button show all orders
 public class OrderHistoryPanel extends JSplitPane implements ListSelectionListener {
-    private OrderAppGUI mainFrame;
+    private final OrderAppGUI mainFrame;
     private SelectDrinksPanel selectDrinksPanel;
     private AddDrinksPanel addDrinksPanel;
-    private JPanel leftPane;
-    private JEditorPane rightTextPane;
+    private final JPanel leftPane;
+    private final JEditorPane rightTextPane;
+    private final JScrollPane rightTextPaneContainer;
     private JList<String> list;
-    private JScrollPane scrollPane;
+    private final JScrollPane scrollPane;
 
-    private JButton addOrder;
-    private JButton deleteOrder;
+    private final JButton showAllOrder;
+    private final JButton addOrder;
+    private final JButton deleteOrder;
     private String[] orderList;
     private int selectedOrderNum;
     private Order selectedOrder;
 
     public OrderHistoryPanel(OrderAppGUI mainFrame) {
         this.mainFrame = mainFrame;
+        rightTextPaneContainer = new JScrollPane();
         rightTextPane = new JEditorPane();
         leftPane = new JPanel();
+        showAllOrder = new JButton("Show Orders");
         addOrder = new JButton("Add Order");
         deleteOrder = new JButton("Delete Order");
+        leftPane.add(showAllOrder);
         leftPane.add(addOrder);
         leftPane.add(deleteOrder);
         scrollPane = new JScrollPane();
         scrollPane.setPreferredSize(new Dimension(200, 200));
         setLeftComponent(leftPane);
-        setRightComponent(rightTextPane);
+        setRightComponent(rightTextPaneContainer);
+        rightTextPaneContainer.setViewportView(rightTextPane);
+        rightTextPaneContainer.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        rightTextPaneContainer.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         setOrientation(JSplitPane.VERTICAL_SPLIT);
 
         setUpOrderActionListener();
@@ -51,9 +59,9 @@ public class OrderHistoryPanel extends JSplitPane implements ListSelectionListen
     //MODIFIES: this
     //EFFECTS: update the order list scroll pane
     public void updateOrderListScrollPane() {
-        orderList = new String[Order.getOrdersHistory().size()];
+        orderList = new String[Order.getOrderHistory().size()];
 
-        for (int i = 0; i < Order.getOrdersHistory().size(); i++) {
+        for (int i = 0; i < Order.getOrderHistory().size(); i++) {
             orderList[i] = "Order" + (i + 1);
         }
 
@@ -64,6 +72,12 @@ public class OrderHistoryPanel extends JSplitPane implements ListSelectionListen
         list.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 
         scrollPane.setColumnHeaderView(list);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: show all order details in the text pane
+    public void showOrdersOnTextPane() {
+
     }
 
     //MODIFIES: this
@@ -83,17 +97,19 @@ public class OrderHistoryPanel extends JSplitPane implements ListSelectionListen
     //MODIFIES: this
     //EFFECTS: initialize selectedOrder with the order selected on the orders list
     public void updateSelectedOrder(int selectedIndex) {
-        selectedOrder = Order.getOrdersHistory().get(selectedIndex);
+        selectedOrder = Order.getOrderHistory().get(selectedIndex);
     }
 
     //MODIFIES: this, Order
-    //EFFECTS: add new order to Order and update the order list scroll pane
+    //EFFECTS: if corresponding buttons is clicked:
+    // add new order to Order and update the order list scroll pane
     //delete order in Order and update the order list scroll pane
+    //show all order for on the text pane
     public void setUpOrderActionListener() {
         addOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Order.addToOrdersHistory(new Order());
+                Order.addToOrderHistory(new Order());
                 updateOrderListScrollPane();
             }
         });
@@ -101,8 +117,15 @@ public class OrderHistoryPanel extends JSplitPane implements ListSelectionListen
         deleteOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Order.deleteOrdersHistory(selectedOrderNum);
+                Order.deleteOrderHistory(selectedOrderNum);
                 updateOrderListScrollPane();
+            }
+        });
+
+        showAllOrder.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showOrdersOnTextPane();
             }
         });
     }

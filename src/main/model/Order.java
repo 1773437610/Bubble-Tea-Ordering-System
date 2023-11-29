@@ -19,27 +19,37 @@ public class Order implements Writable {
 
     //MODIFIES: this
     //EFFECTS: add the drink ordered into itemsOrdered
-    public void addToOrdered(Drinks itemsOrdered) {
+    public void addDrink(Drinks itemsOrdered) {
         this.itemsOrdered.add(itemsOrdered);
+        EventLog.getInstance().logEvent(new Event(itemsOrdered.toString() + " added to order."));
+    }
+
+    //MODIFIES: this
+    //EFFECTS: delete the drink in itemsOrdered
+    public void deleteDrink(Drinks itemsOrdered) {
+        this.itemsOrdered.remove(itemsOrdered);
+        EventLog.getInstance().logEvent(new Event(itemsOrdered.toString() + " deleted from order."));
     }
 
     //MODIFIES: this
     //EFFECTS: add the order into ordersHistory
-    public static void addToOrdersHistory(Order order) {
+    public static void addToOrderHistory(Order order) {
         orderHistory.add(order);
+        EventLog.getInstance().logEvent(new Event("order added to order history."));
     }
 
     //MODIFIES: this
     //EFFECTS: delete the order in ordersHistory
-    public static void deleteOrdersHistory(int position) {
+    public static void deleteOrderHistory(int position) {
         orderHistory.remove(position);
+        EventLog.getInstance().logEvent(new Event("Drink at " + position + " removed from order."));
     }
 
     public ArrayList<Drinks> getItemsOrdered() {
         return itemsOrdered;
     }
 
-    public static ArrayList<Order> getOrdersHistory() {
+    public static ArrayList<Order> getOrderHistory() {
         return orderHistory;
     }
 
@@ -78,5 +88,26 @@ public class Order implements Writable {
         }
 
         return json;
+    }
+
+    //EFFECTS: return String for the details of the selected order
+    public String showOrderDetails() {
+        EventLog.getInstance().logEvent(new Event("Order details displayed."));
+        String text = "Order detail:\n";
+
+        for (int i = 0; i < itemsOrdered.size(); i++) {
+            Drinks drink = itemsOrdered.get(i);
+            text += (i + 1) + "." + drink.getClass().toString().substring(12);
+            text += "\n   Sweetness: " + drink.getSweetness();
+            text += "\n   Size: " + drink.getSize();
+
+            if (drink.getClass().equals(MilkTea.class)) {
+                text += "\n   IceLevel:" + ((MilkTea) drink).getIceLevel();
+            }
+
+            text += "\n";
+        }
+
+        return text;
     }
 }

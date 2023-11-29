@@ -11,7 +11,7 @@ public class ModifyOrders {
     public static void modifyOrder() {
         Order order = new Order();
         addDrinks(order);
-        Order.addToOrdersHistory(order);
+        Order.addToOrderHistory(order);
     }
 
 
@@ -28,11 +28,11 @@ public class ModifyOrders {
                 answer = input.next();
                 if (answer.equals("MilkTea")) {
                     Drinks drinks = new MilkTea(input.nextInt(), input.nextInt(), input.next());
-                    order.addToOrdered(drinks);
+                    order.addDrink(drinks);
                     AddToppings.addToppings(drinks);
                 } else if (answer.equals("Drinks")) {
                     Drinks drinks = new Drinks(input.nextInt(), input.next());
-                    order.addToOrdered(drinks);
+                    order.addDrink(drinks);
                     AddToppings.addToppings(drinks);
                 }
             } else if (answer.equals("N")) {

@@ -83,4 +83,10 @@ class TestDrinks {
         //test all are not equals
         assertFalse(drinks.equals(new Drinks(30, "Medium")));
     }
+
+    @Test
+    void testToString() {
+        assertEquals("MilkTea", drinks.toString());
+        assertEquals("Drinks", drinks2.toString());
+    }
 }

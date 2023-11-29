@@ -13,20 +13,19 @@ import java.util.ArrayList;
 //Represents the right split pane under the manage order panel
 public class AddDrinksPanel extends JSplitPane {
     private final JPanel drinkPanel;
-    private JSplitPane splitPane;
-    private JComboBox<String> types;
-    private JComboBox<Integer> iceLevel;
-    private JComboBox<Integer> sweetness;
-    private JComboBox<String> size;
-    private JLabel sweetnessLabel;
+    private final JComboBox<String> types;
+    private final JComboBox<Integer> iceLevel;
+    private final JComboBox<Integer> sweetness;
+    private final JComboBox<String> size;
+
     private final String[] typesOfDrinks = {"MilkTea", "Drinks"};
     private final Integer[] sweetnessList = {100, 80, 50, 20, 0};
     private final Integer[] iceLevelList = {100, 80, 50, 20, 0};
     private final String[] sizeList = {"Medium", "Small", "Large"};
-    private ArrayList<JCheckBox> checkBoxList;
-    private OrderHistoryPanel orderHistoryPanel;
-    private JScrollPane textPaneScrollContainer;
-    private JEditorPane textPane;
+    private final ArrayList<JCheckBox> checkBoxList;
+    private final OrderHistoryPanel orderHistoryPanel;
+    private final JScrollPane textPaneScrollContainer;
+    private final JEditorPane textPane;
 
     public AddDrinksPanel(OrderHistoryPanel orderHistoryPanel) {
         this.orderHistoryPanel = orderHistoryPanel;
@@ -38,6 +37,8 @@ public class AddDrinksPanel extends JSplitPane {
         checkBoxList = new ArrayList<>();
         textPane = new JEditorPane();
         textPaneScrollContainer = new JScrollPane();
+
+        //drinkPanel.setBackground(new Color(255,226,226));
 
         setUpTopPane();
 
@@ -55,7 +56,7 @@ public class AddDrinksPanel extends JSplitPane {
         drinkPanel.add(new JLabel("Drinks:"));
         drinkPanel.add(types);
 
-        sweetnessLabel = new JLabel("Sweetness:");
+        JLabel sweetnessLabel = new JLabel("Sweetness:");
         drinkPanel.add(sweetnessLabel);
         drinkPanel.add(sweetness);
 
@@ -71,8 +72,10 @@ public class AddDrinksPanel extends JSplitPane {
     public void setUpCheckBoxes() {
         JPanel left = new JPanel();
         JPanel right = new JPanel();
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, left, right);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, left, right);
         splitPane.setDividerLocation(OrderAppGUI.FRAME_WIDTH / 3);
+        //left.setBackground(new Color(255,226,226));
+        //right.setBackground(new Color(255,226,226));
         splitPane.setVisible(true);
         JLabel text = new JLabel("Select Toppings:");
         left.add(text, BorderLayout.WEST);
@@ -94,31 +97,6 @@ public class AddDrinksPanel extends JSplitPane {
         setBottomComponent(splitPane);
     }
 
-    //EFFECTS: return String for the details of the selected order
-    public String updateOrderDetail() {
-
-        String text = "Order detail:\n";
-
-        if (orderHistoryPanel.getSelectedOrder() != null) {
-            ArrayList<Drinks> order = orderHistoryPanel.getSelectedOrder().getItemsOrdered();
-
-            for (int i = 0; i < order.size(); i++) {
-                Drinks drink = order.get(i);
-                text += (i + 1) + "." + drink.getClass().toString().substring(12);
-                text += "\n   Sweetness: " + drink.getSweetness();
-                text += "\n   Size: " + drink.getSize();
-
-                if (drink.getClass().equals(MilkTea.class)) {
-                    text += "\n   IceLevel:" + ((MilkTea) drink).getIceLevel();
-                }
-
-                text += "\n";
-            }
-        }
-
-        return text;
-    }
-
     //EFFECTS: return an arrayList of Ingredients selected in check boxes
     public ArrayList<Ingredients> getSelectedToppings() {
         ArrayList<Ingredients> array = new ArrayList<>();
@@ -135,7 +113,7 @@ public class AddDrinksPanel extends JSplitPane {
     //EFFECTS: return a new drink that is customized by user
     public Drinks getNewDrinksCreated() {
         int iceLevelValue = ((Integer) iceLevel.getSelectedItem());
-        int sweetnessValue = ((Integer)sweetness.getSelectedItem());
+        int sweetnessValue = ((Integer) sweetness.getSelectedItem());
         String sizeValue = (String) size.getSelectedItem();
 
         if (types.getSelectedItem().equals("MilkTea")) {
@@ -147,6 +125,15 @@ public class AddDrinksPanel extends JSplitPane {
             addSelectedToppingToDrink(drink);
             return drink;
         }
+    }
+
+    //EFFECTS:
+    public String updateOrderDetail() {
+        if (orderHistoryPanel.getSelectedOrder() != null) {
+            return orderHistoryPanel.getSelectedOrder().showOrderDetails();
+        }
+
+        return "Order details:";
     }
 
     //MODIFIES: this
