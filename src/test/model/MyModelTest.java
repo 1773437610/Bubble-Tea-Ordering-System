@@ -47,10 +47,14 @@ class TestOrder {
     @Test
     void testShowOrderDetails() {
         order.addDrink(drinks);
+        order.addDrink(new Drinks(5, "Small"));
         assertEquals("Order detail:\n" +
                 "1.MilkTea\n" +
                 "   Sweetness: 50\n" +
                 "   Size: Medium\n" +
-                "   IceLevel:50\n", order.showOrderDetails());
+                "   IceLevel:50\n" +
+                "2.Drinks\n" +
+                "   Sweetness: 5\n" +
+                "   Size: Small\n", order.showOrderDetails());
     }
 }
